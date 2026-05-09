@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:nextstore/Screens/HomeScreens/Home.dart';
+import 'package:nextstore/MotherLayout/MotherLayout.dart';
+
 
 void main(){
   runApp(MyApp());
@@ -15,6 +16,15 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return Home();
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Motherlayout(),
+      theme: ThemeData(
+        appBarTheme: AppBarTheme(
+            color: Colors.amberAccent,
+        ),
+
+      ),
+    );
   }
 }
