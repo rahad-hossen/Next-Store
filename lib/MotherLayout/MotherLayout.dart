@@ -13,52 +13,71 @@ class Motherlayout extends StatefulWidget {
 }
 
 class _MotherlayoutState extends State<Motherlayout> {
+  int _currentIndex = 0;
 
-  List<Widget> BottomManu = [
-    Home(),
+
+  final List<Widget> _bottomMenu = const [
+    HomeScreen(),
     Invertoryscreen(),
     AnalysicsScreen(),
-    ProfileScreen()
+    ProfileScreen(),
   ];
-  int current_index = 0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BottomManu[current_index],
-      bottomNavigationBar: BottomNavigationBar(
+      body: IndexedStack(
+        index: _currentIndex,
+        children: _bottomMenu,
+      ),
 
-        type: BottomNavigationBarType.fixed,
-          currentIndex: current_index,
+      bottomNavigationBar: Container(
+        decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.05),
+              blurRadius: 10,
+              spreadRadius: 2,
+            ),
+          ],
+        ),
+        child: BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
+          currentIndex: _currentIndex,
           showSelectedLabels: false,
           showUnselectedLabels: false,
-          onTap: (index){
+
+          selectedItemColor: Colors.orange.shade800,
+          unselectedItemColor: Colors.grey.shade400,
+          backgroundColor: Colors.white,
+          elevation: 0,
+
+          iconSize: 28,
+
+          onTap: (index) {
             setState(() {
-              current_index = index;
+              _currentIndex = index;
             });
-
           },
-          items: [
-
+          items: const [
             BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label:  ""
-
-            ),
-
-            BottomNavigationBarItem(
-                icon: Icon(Icons.inventory),
-                label:  ""
+              icon: Icon(Icons.home_rounded),
+              label: "",
             ),
             BottomNavigationBarItem(
-                icon: Icon(Icons.analytics_outlined),
-                label:  ""
+              icon: Icon(Icons.inventory_2_rounded),
+              label: "",
             ),
             BottomNavigationBarItem(
-                icon: Icon(CupertinoIcons.profile_circled),
-                label:  ""
-            )
-          ]
+              icon: Icon(Icons.analytics_rounded),
+              label: "",
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(CupertinoIcons.person_crop_circle_fill),
+              label: "",
+            ),
+          ],
+        ),
       ),
     );
   }

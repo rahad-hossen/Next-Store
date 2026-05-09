@@ -19,9 +19,10 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Motherlayout(),
+      themeMode: ThemeMode.dark,
       theme: ThemeData(
         appBarTheme: AppBarTheme(
-            color: Colors.amberAccent,
+            color: Colors.white54,
         ),
 
       ),
