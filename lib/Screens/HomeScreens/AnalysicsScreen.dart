@@ -19,7 +19,7 @@ class AnalysicsScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // ১. টাইম ফিল্টার (Today, Weekly, Monthly)
+
             Container(
               padding: const EdgeInsets.all(5),
               decoration: BoxDecoration(
@@ -29,14 +29,13 @@ class AnalysicsScreen extends StatelessWidget {
               child: Row(
                 children: [
                   _buildTimeTab("Today", false),
-                  _buildTimeTab("Weekly", true), // Weekly সিলেক্টেড
+                  _buildTimeTab("Weekly", true),
                   _buildTimeTab("Monthly", false),
                 ],
               ),
             ),
             const SizedBox(height: 25),
 
-            // ২. রেভিনিউ চার্ট এরিয়া (Placeholder)
             const Text("Revenue Overview",
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
             const SizedBox(height: 15),
@@ -63,7 +62,7 @@ class AnalysicsScreen extends StatelessWidget {
             ),
             const SizedBox(height: 25),
 
-            // ৩. প্রফিট ও কাস্টমার স্ট্যাটাস কার্ড
+
             Row(
               children: [
                 _buildAnalysisCard("Net Profit", "৳ 4,200", Icons.trending_up, Colors.green),
@@ -73,7 +72,6 @@ class AnalysicsScreen extends StatelessWidget {
             ),
             const SizedBox(height: 25),
 
-            // ৪. টপ সেলিং প্রোডাক্টস
             const Text("Top Selling Products",
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
             const SizedBox(height: 15),
@@ -88,7 +86,6 @@ class AnalysicsScreen extends StatelessWidget {
     );
   }
 
-  // টাইম ট্যাব বিল্ডার
   Widget _buildTimeTab(String label, bool isSelected) {
     return Expanded(
       child: Container(
@@ -110,7 +107,6 @@ class AnalysicsScreen extends StatelessWidget {
     );
   }
 
-  // এনালাইসিস কার্ড বিল্ডার
   Widget _buildAnalysisCard(String title, String value, IconData icon, Color color) {
     return Expanded(
       child: Container(
@@ -133,7 +129,6 @@ class AnalysicsScreen extends StatelessWidget {
     );
   }
 
-  // টপ প্রোডাক্ট রো বিল্ডার
   Widget _buildTopProduct(String name, String sold, String total) {
     return Container(
       margin: const EdgeInsets.only(bottom: 12),

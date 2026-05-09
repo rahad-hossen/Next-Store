@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nextstore/Screens/FunctionalScreens/AddProductScreen.dart';
 
 class Invertoryscreen extends StatelessWidget {
   const Invertoryscreen({super.key});
@@ -18,7 +19,6 @@ class Invertoryscreen extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Column(
           children: [
-            // ১. ইনভেন্টরি সামারি কার্ডস
             Row(
               children: [
                 _buildStatCard("Total Items", "125", Colors.blue),
@@ -28,7 +28,6 @@ class Invertoryscreen extends StatelessWidget {
             ),
             const SizedBox(height: 25),
 
-            // ২. সার্চ এবং ফিল্টার সেকশন
             Row(
               children: [
                 Expanded(
@@ -58,7 +57,6 @@ class Invertoryscreen extends StatelessWidget {
             ),
             const SizedBox(height: 20),
 
-            // ৩. প্রোডাক্ট লিস্ট হেডার
             const Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -69,7 +67,6 @@ class Invertoryscreen extends StatelessWidget {
             ),
             const SizedBox(height: 10),
 
-            // ৪. প্রোডাক্ট লিস্ট
             Expanded(
               child: ListView(
                 physics: const BouncingScrollPhysics(),
@@ -86,16 +83,16 @@ class Invertoryscreen extends StatelessWidget {
         ),
       ),
 
-      // নতুন প্রোডাক্ট যোগ করার বাটন
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context)=> AddProductScreen()));
+        },
         backgroundColor: Colors.orange,
         child: const Icon(Icons.add, color: Colors.white),
       ),
     );
   }
 
-  // স্ট্যাটাস কার্ড বিল্ডার
   Widget _buildStatCard(String title, String value, Color color) {
     return Expanded(
       child: Container(
@@ -118,7 +115,7 @@ class Invertoryscreen extends StatelessWidget {
     );
   }
 
-  // ইনভেন্টরি লিস্ট আইটেম বিল্ডার
+
   Widget _buildProductItem(String name, String price, String qty, Color stockColor) {
     return Container(
       margin: const EdgeInsets.only(bottom: 12),

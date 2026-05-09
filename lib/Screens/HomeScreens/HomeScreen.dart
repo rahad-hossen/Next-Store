@@ -1,8 +1,18 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:nextstore/Screens/CustomWidget/RecentCards.dart';
+import 'package:nextstore/Screens/FunctionalScreens/PosScreen.dart';
+import 'package:nextstore/Screens/FunctionalScreens/NotificationScreen.dart';
+import 'package:nextstore/Screens/HomeScreens/AnalysicsScreen.dart';
+import 'package:nextstore/Screens/HomeScreens/InvertoryScreen.dart';
+import 'package:nextstore/Screens/HomeScreens/ProfileScreen.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+  const HomeScreen();
+
+  final List<String> activity_title = const ["New Bill","Inventory", "History","Report"];
+  final List<IconData> activity_icon =const [Icons.add,Icons.inventory, Icons.history,Icons.report];
+  // finalint current_click = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +52,18 @@ class HomeScreen extends StatelessWidget {
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 15),
-            child: Badge(child: Icon(CupertinoIcons.bell, size: 28,),label: Text("11"),),
+            child: InkWell(
+              onTap: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context)=> NotificationScreen()));
+              },
+              child: Badge(
+                child: Icon(CupertinoIcons.bell,
+                size: 28,
+                ),
+                label: Text("11"),
+
+              ),
+            ),
 
           ),
 
@@ -102,57 +123,50 @@ class HomeScreen extends StatelessWidget {
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+
+                      // Navigator.push(context, MaterialPageRoute(builder: (context)=> POSScreen()));
+                      //
+                      },
                     child: const Text("View All", style: TextStyle(color: Colors.orange)),
                   ),
                 ],
               ),
               const SizedBox(height: 10),
 
-              GridView.count(
+              GridView.builder(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
-                crossAxisCount: 2,
-                crossAxisSpacing: 15,
-                mainAxisSpacing: 15,
-                childAspectRatio: 1.1,
-                children: [
-                  _buildActionButton(
-                    icon: Icons.receipt_outlined,
-                    label: "New Bill",
-                    bgColor: Colors.orange,
-                    iconColor: Colors.white,
-                    textColor: Colors.white,
-                  ),
-                  _buildActionButton(
-                    icon: Icons.receipt_outlined,
-                    label: "New Bill",
-                    bgColor: Colors.orange,
-                    iconColor: Colors.white,
-                    textColor: Colors.white,
-                  ),
-                  _buildActionButton(
-                    icon: Icons.inventory_2_outlined,
-                    label: "Inventory",
-                    bgColor: Colors.white,
-                    iconColor: Colors.grey.shade700,
-                    textColor: Colors.black87,
-                  ),
-                  _buildActionButton(
-                    icon: Icons.assessment_outlined,
-                    label: "Reports",
-                    bgColor: Colors.white,
-                    iconColor: Colors.grey.shade700,
-                    textColor: Colors.black87,
-                  ),
-                  _buildActionButton(
-                    icon: Icons.group_outlined,
-                    label: "Customer Due",
-                    bgColor: Colors.white,
-                    iconColor: Colors.grey.shade700,
-                    textColor: Colors.black87,
-                  ),
-                ],
+                itemCount: activity_title.length,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 15,
+                  mainAxisSpacing: 15,
+                  childAspectRatio: 1.1,
+                ),
+                itemBuilder: (context, i) {
+                  bool isSpecial = (i == 0);
+
+                  return ActivityCard(
+                    icon: activity_icon[i],
+                    label: activity_title[i],
+                    bgColor: isSpecial ? Colors.orange : Colors.white,
+                    iconColor: isSpecial ? Colors.white : Colors.grey.shade700,
+                    textColor: isSpecial ? Colors.white : Colors.black87,
+                    onTap: () {
+                      if (i == 0) {
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => const POSScreen()));
+                      }
+                      else if (i == 1) {
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => const Invertoryscreen()));
+                      } else if (i == 2) {
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => const AnalysicsScreen()));
+                      } else if (i == 3) {
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => const ProfileScreen()));
+                      }
+                    },
+                  );
+                },
               ),
             ],
           ),
@@ -191,36 +205,4 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildActionButton({
-    required IconData icon,
-    required String label,
-    required Color bgColor,
-    required Color iconColor,
-    required Color textColor,
-  }) {
-    return Container(
-      decoration: BoxDecoration(
-        color: bgColor,
-        borderRadius: BorderRadius.circular(25),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.05),
-            blurRadius: 10,
-            offset: const Offset(0, 4),
-          ),
-        ],
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(icon, color: iconColor, size: 35),
-          const SizedBox(height: 10),
-          Text(
-            label,
-            style: TextStyle(color: textColor, fontWeight: FontWeight.bold, fontSize: 15),
-          ),
-        ],
-      ),
-    );
-  }
 }

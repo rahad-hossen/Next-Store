@@ -25,7 +25,6 @@ class ProfileScreen extends StatelessWidget {
           children: [
             const SizedBox(height: 20),
 
-            // প্রোফাইল ফটো এবং নাম
             Center(
               child: Column(
                 children: [
@@ -55,7 +54,7 @@ class ProfileScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 15),
                   const Text(
-                    "NextStore - Rahad", // আপনার নাম প্রোফাইলে যুক্ত
+                    "NextStore - Rahad",
                     style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                   ),
                   const Text(
@@ -68,7 +67,6 @@ class ProfileScreen extends StatelessWidget {
 
             const SizedBox(height: 30),
 
-            // প্রোফাইল মেনু আইটেম
             _buildProfileMenu(
               icon: Icons.business_center_outlined,
               title: "Business Settings",
@@ -97,7 +95,6 @@ class ProfileScreen extends StatelessWidget {
 
             const SizedBox(height: 20),
 
-            // লগআউট বাটন
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: SizedBox(
@@ -121,7 +118,6 @@ class ProfileScreen extends StatelessWidget {
     );
   }
 
-  // মেনু লিস্ট বিল্ডার
   Widget _buildProfileMenu({
     required IconData icon,
     required String title,
